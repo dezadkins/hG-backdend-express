@@ -1,11 +1,33 @@
 import express from "express";
 import fs from "fs";
 import bodyParser from "body-parser";
+import multer from "multer";
 
 import path from "path";
 // require("dotenv/config");
 
 import { Post } from "../models/post.js";
+
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Set EJS as templating engine
+app.set("view engine", "ejs");
+
+let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + "-" + Date.now());
+  },
+});
+
+let upload = multer({ storage: storage });
+
+// *************** ROUTING ******************** //
 
 const router = express.Router();
 

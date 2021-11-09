@@ -7,11 +7,11 @@ import { posts } from "./routes/posts.js";
 import { MONGO_URI } from "./config/keys.js";
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 
-// Set EJS as templating engine
-app.set("view engine", "ejs");
+// // Set EJS as templating engine
+// app.set("view engine", "ejs");
 
 // CRUDING IS HAPPENING HERE GET, POST, PUT, PATCH, DELETE
 
@@ -25,6 +25,16 @@ mongoose
 app.get("/didwegetit", (req, res) => {
   res.send("We did get it! Wooohoo!");
 });
+
+let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + "-" + Date.now());
+  },
+});
+let upload = multer({ storage: storage });
 
 app.use("/api/posts", posts);
 
