@@ -1,4 +1,9 @@
 import express from "express";
+import fs from "fs";
+import bodyParser from "body-parser";
+
+import path from "path";
+// require("dotenv/config");
 
 import { Post } from "../models/post.js";
 
@@ -13,7 +18,10 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   const newPost = new Post({
     name: req.body.name,
-    content: req.body.content,
+    desc: req.body.desc,
+    img: {
+      data: fs.readFileSync(path.join(_)),
+    },
   });
   newPost
     .save()

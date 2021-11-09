@@ -1,10 +1,17 @@
 import express from "express";
 import mongoose from "mongoose";
+import bodyParser from "body-parser";
+import multer from "multer";
 
 import { posts } from "./routes/posts.js";
 import { MONGO_URI } from "./config/keys.js";
-
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Set EJS as templating engine
+app.set("view engine", "ejs");
 
 // CRUDING IS HAPPENING HERE GET, POST, PUT, PATCH, DELETE
 

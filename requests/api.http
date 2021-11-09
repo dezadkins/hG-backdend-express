@@ -15,5 +15,5 @@ Content-Type: application/json
 
 
 ### Delete Question
-DELETE  http://127.0.0.1:8081/api/posts/2
+DELETE  http://127.0.0.1:8081/api/posts/
 Content-Type: application/json

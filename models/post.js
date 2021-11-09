@@ -4,14 +4,12 @@ const Schema = mongoose.Schema;
 
 const PostSchema = Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
+    name: String,
 
-    content: {
-      type: String,
-      required: true,
+    desc: String,
+    img: {
+      data: Buffer,
+      contentType: String,
     },
   },
   { timestamps: true }
