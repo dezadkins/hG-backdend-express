@@ -1,4 +1,5 @@
 import express from "express";
+import { posts } from "./routes/posts.js";
 
 const app = express();
 
@@ -9,6 +10,8 @@ app.use(express.json());
 app.get("/didwegetit", (req, res) => {
   res.send("We did get it! Wooohoo!");
 });
+
+app.use("/api/posts", posts);
 
 const port = process.env.PORT || 8081;
 

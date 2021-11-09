@@ -1,0 +1,19 @@
+### Get Post
+GET http://127.0.0.1:8081/api/posts
+Content-Type: application/json
+
+### Submit Post
+POST  http://127.0.0.1:8081/api/posts
+Content-Type: application/json
+
+{
+    "name": "Dezy",
+    "content": "Austin Texas is a good weird.."
+}
+
+
+
+
+### Delete Question
+DELETE  http://127.0.0.1:8081/api/posts/2
+Content-Type: application/json

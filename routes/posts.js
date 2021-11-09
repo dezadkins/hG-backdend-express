@@ -1,24 +1,30 @@
 import express from "express";
 
+import { Post } from "../models/post.js";
+
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  const posts = [
-    { _id: 1, name: "Elena Marquez", content: "San Francisco! Places to Eat" },
-    { _id: 2, name: "Gil Guedes", content: "Columbus, OH. A true hidden gem" },
-    { _id: 3, name: "Marc Graham", content: "Best places to be in Boston" },
-  ];
-  res.json(posts);
+  Post.find()
+    .then((posts) => res.json(posts))
+    .catch((err) => res.status(404).json(err));
 });
 
 router.post("/", (req, res) => {
-  const post = req.body;
-  res.json(post);
+  const newPost = new Post({
+    name: req.body.name,
+    content: req.body.content,
+  });
+  newPost
+    .save()
+    .then((post) => res.json(post))
+    .catch((err) => res.status(404).json(err));
 });
 
 router.delete("/:post_id", (req, res) => {
-  const _id = req.params.post_id;
-  res.json(id);
+  Post.findOneAndDelete({ _id: req.params.post_id })
+    .then((post) => res.json({ _id: post._id }))
+    .catch((err) => res.status(404).json(err));
 });
 
 export const posts = router;
